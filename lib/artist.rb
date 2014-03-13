@@ -23,12 +23,16 @@ class Artist
   end
 
   def self.create(name)
-    new_artist = Artist.new(name)
-    unless Artist.all.include?(new_artist)
+    redundant_artist = Artist.all.bsearch do |artist|
+      name == artist.name
+    end
+
+    if redundant_artist.nil?
+      new_artist = Artist.new(name)
       new_artist.save
       new_artist
     else
-      nil
+      redundant_artist
     end
   end
 

@@ -48,7 +48,12 @@ def add_cd
 end
 
 def list_cds
-  CD.all.each { |cd| puts "#{cd.artist.name}: \"#{cd.album_name}\"" }
+  Artist.all.each do |artist|
+    puts "#{artist.name}:"
+    artist.cds.each do |album|
+      puts "\t#{album.album_name}"
+    end
+  end
   puts "\n\n"
 end
 
