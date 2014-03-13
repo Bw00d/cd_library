@@ -1,4 +1,5 @@
 require 'cd'
+require 'artist'
 require 'rspec'
 
 describe CD do
@@ -40,10 +41,49 @@ describe CD do
   end
 
   describe '.clear' do
-    it 'empties out all of the saved terms from the array' do
+    it 'empties out all of the saved items from the array' do
       CD.create('Pink Floyd', 'Darkside of the Moon')
       CD.clear
       CD.all.should eq []
+    end
+  end
+end
+
+describe Artist do
+  before do
+    Artist.clear
+  end
+
+  describe '#initialize' do
+    it 'initializes an Artist instance' do
+      test_artist = Artist.new('Pink Floyd')
+      test_artist.should be_an_instance_of Artist
+    end
+  end
+
+  describe '.all' do
+    it 'is empty at first' do
+      Artist.all.should eq []
+    end
+  end
+
+  describe '.create' do
+    it 'initializes a new Artist instance' do
+      test_artist = Artist.create('Pink Floyd')
+      test_artist.should be_an_instance_of Artist
+    end
+
+    it 'saves it to @@artist_list' do
+      test_artist = Artist.create('Pink Floyd')
+      Artist.all.should eq [test_artist]
+    end
+  end
+
+  describe '.clear' do
+    it 'empties out all of the saved items from the array' do
+      Artist.create('Pink Floyd')
+      Artist.clear
+      Artist.all.should eq []
     end
   end
 end

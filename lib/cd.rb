@@ -1,11 +1,13 @@
 class CD
   @@library = []
 
-  attr_reader :artist_name, :album_name
+  attr_reader :artist, :album_name
 
   def initialize(artist_name, album_name)
-    @artist_name = artist_name
+    @artist = Artist.create(artist_name)
     @album_name = album_name
+    @artist.add_cd(self)
+    @artist
   end
 
   def self.create(artist_name, album_name)
@@ -17,7 +19,7 @@ class CD
   def save
     CD.all << self
     CD.all.sort! do |x, y|
-      x.artist_name <=> y.artist_name
+      x.artist.name <=> y.artist.name
     end
   end
 
@@ -29,3 +31,16 @@ class CD
     @@library = []
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
