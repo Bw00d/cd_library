@@ -7,7 +7,6 @@ class CD
     @artist = Artist.create(artist_name)
     @album_name = album_name
     @artist.add_cd(self)
-    @artist
   end
 
   def self.create(artist_name, album_name)
